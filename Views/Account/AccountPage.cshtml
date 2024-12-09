@@ -1,0 +1,285 @@
+﻿@{
+    ViewData["Title"] = "Account Page";
+}
+
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+<!-- Bootstrap JS (with Popper for modal functionality) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- jQuery (if not already included) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+<div id="accountPage" class="container mt-5">
+    <!-- Login Form -->
+    <div id="loginForm" data-bind="visible: currentView() === 'login'">
+        <!-- Login Form Section -->
+        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+            <div class="col-md-8 col-lg-6 col-xl-4">
+                <div class="alert text-center mb-5 rounded-3 shadow-lg" style="background: linear-gradient(to right, #00c6ff, #0072ff); max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 class="display-4 font-weight-bold text-white mb-3">PassMate</h2>
+                    <p class="lead text-white-50">Your Secure Password Manager</p>
+                </div>
+                <h2 class="text-center mb-4">Login</h2>
+                <form id="loginForm" data-bind="submit: login" class="shadow-lg p-4 rounded border bg-white" style="border: 2px solid #0072ff;">
+                    <!-- Email Input -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" data-bind="value: email" class="form-control" placeholder="Enter your email" required />
+                    </div>
+
+                    <!-- Password Input -->
+                    <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+                        <input type="password" id="password" data-bind="value: password" class="form-control" placeholder="Enter your password" required />
+                    </div>
+
+                    <!-- Login Button -->
+                    <button type="submit" class="btn btn-primary w-100"><i class="fa-solid fa-right-to-bracket"></i>  Login</button>
+                </form>
+
+                <!-- Registration Link -->
+                <div class="mt-3 text-center">
+                    <p>Don't have an account? <a href="#" data-bind="click: showRegister">Register here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Register Form -->
+    <div id="registerForm" data-bind="visible: currentView() === 'register'">
+        <div class="container d-flex justify-content-center align-items-center min-vh-100">
+            <div class="col-md-8 col-lg-6 col-xl-4">
+                <div class="alert text-center mb-5 rounded-3 shadow-lg" style="background: linear-gradient(to right, #00c6ff, #0072ff); max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <h2 class="display-4 font-weight-bold text-white mb-3">PassMate</h2>
+                    <p class="lead text-white-50">Your Secure Password Manager</p>
+                </div>
+                    <h2 class="text-center">Register</h2>
+                    <form id="registerForm" data-bind="submit: register" class="shadow p-4 rounded border">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">User Name</label>
+                            <input type="text" id="username" data-bind="value: userName" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" data-bind="value: email" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" data-bind="value: password" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" id="confirmPassword" data-bind="value: confirmPassword" class="form-control" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="securityQuestion" class="form-label">Security Question</label>
+                            <select id="securityQuestion" data-bind="value: selectedSecurityQuestion" class="form-select" required>
+                                <option value="" disabled selected>Select a question</option>
+                                <option value="1">What is your mother's maiden name?</option>
+                                <option value="2">What was the name of your first pet?</option>
+                                <option value="3">What was the name of your elementary school?</option>
+                                <option value="4">In what city were you born?</option>
+                                <option value="5">What is the name of your favorite book?</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="securityAnswer" class="form-label">Security Answer</label>
+                            <input type="text" id="securityAnswer" data-bind="value: securityAnswer" class="form-control" required />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Register</button>
+                    </form>
+                    <div class="mt-3">
+                        <p class="text-center">Already have an account? <a href="#" data-bind="click: showLogin">Login here</a></p>
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home / Dashboard -->
+    <div id="homePage" data-bind="visible: currentView() === 'home'">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light position-sticky top-0 shadow-sm" style="margin-top: 6; padding-top: 6;">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">PassMate</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <!-- Add Password Button -->
+                        <li class="nav-item">
+                            <button class="btn btn-lg btn-primary" data-bs-toggle="modal" data-bind="click: addNewPassword"><i class="fa-solid fa-plus"></i> Add Password</button>
+                        </li>
+                    </ul>
+
+                    <ul class="navbar-nav ms-3 mb-2 mb-lg-0">
+                        <li class="nav-item" >
+                                <form autocomplete="off" class="form-inline">
+                                <input type="text" id="searchBar" class="form-control" placeholder="Search for passwords..." data-bind="value: searchQuery, valueUpdate: 'input'" autocomplete="off"
+                                       autocorrect="off"
+                                       autocapitalize="off"
+                                       spellcheck="false"
+                                       style="height: calc(2.25rem + 6px); width: 400px; padding-left: 15px;" ;
+                                       name="searchQueryInput"
+                                        />
+                                </form>
+                        </li>
+                        <!-- User Greeting -->
+                        <li class="nav-item d-flex align-items-center ps-3 pe-6">
+                            <span class="navbar-text">
+                                Welcome, <span data-bind="text: userEmail"></span>
+                            </span>
+                        </li>
+                        <!-- Logout Button -->
+                        <li class="nav-item">
+                            <a href="#" data-bind="click: logout" class="btn btn-lg btn-danger ms-3"><i class="fa-solid fa-arrow-right-from-bracket"></i> Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Create New Password Section -->
+        <div id="createPasswordModal" class="modal fade" tabindex="-1" aria-labelledby="createPasswordModalLabel" aria-hidden="true" role="dialog" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="createPasswordModalLabel" data-bind="text: modalTitle"></h5>
+                    </div>
+                    <div class="modal-body">
+                        <form data-bind="submit: saveOrUpdatePassword" class="shadow p-4 rounded border">
+                            <div class="mb-3">
+                                <label for="title" class="form-label">Title</label>
+                                <input type="text" id="title" data-bind="value: newPassword.title" class="form-control" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="website" class="form-label">Website</label>
+                                <input type="url" id="website" data-bind="value: newPassword.website" class="form-control" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <input type="text" id="username" data-bind="value: newPassword.userName" class="form-control" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" id="password" data-bind="value: newPassword.password" class="form-control" required />
+                            </div>
+                            <div class="d-flex w-100">
+                                <div class="flex-fill pr-2">
+                                    <button type="submit" class="btn btn-sm btn-success w-100 p-3" data-bind="text: modalButton">Submit</button>
+                                </div>
+                                <div class="flex-fill px-2">
+                                    <button type="button" class="btn btn-sm btn-warning w-100 p-3" data-bind="click: clearPasswordForm">Clear</button>
+                                </div>
+                                <div class="flex-fill pl-2">
+                                    <button type="button" class="btn btn-sm btn-secondary w-100 p-3" data-bind="click: closeCreateEditPasswordModal">Close</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- Password Verification Modal -->
+        <div id="verifyPasswordModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="verifyPasswordModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="verifyPasswordModalLabel">Verify Your Account Master Password</h5>
+                    </div>
+                    <div class="modal-body">
+                        <input type="password" id="accountPassword" class="form-control" placeholder="Enter your password" data-bind="value: enteredPassword" />
+                        <button class="btn btn-primary mt-2" data-bind="click: verifyUserPassword">Verify</button>
+                        <button type="button" class="btn btn-secondary mt-2" data-bs-dismiss="modal" data-bind="click: closeVerifyPasswordModal ">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Confirmation  Delete Modal -->
+        <div class="modal fade" id="deletePasswordModal" tabindex="-1" role="dialog" aria-labelledby="deletePasswordModalLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deletePasswordModalLabel">Delete Password Entry</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Are you sure you want to delete this password entry? This action cannot be undone.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-danger" id="confirmDeleteButton">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <!-- Password List Table -->
+        <h3>Your Passwords</h3>
+        <table class="table table-bordered table-hover table-success">
+            <thead class="table-light">
+                <tr>
+                    <th class="text-center">Title</th>
+                    <th class="text-center">Website</th>
+                    <th class="text-center">Username</th>
+                    <th class="text-center">Password</th>
+                    <th class="text-center">Actions</th>
+                </tr>
+            </thead>
+            <tbody data-bind="foreach: filteredPasswordEntries">
+                <tr>
+                    <td data-bind="text: title" ></td>
+                    <td data-bind="text: website"></td>
+                    <td data-bind="text: userName"></td>
+                    <td>
+                        <span data-bind="text: displayPassword() ? password : '****'"></span>
+                    </td>
+                    <td style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+                        <button class="btn btn-info btn-lg mt-1" data-bind="click: $parent.verifyPassword" title="View"><i class="fa-solid fa-eye"></i></button>
+                        <button class="btn btn-warning btn-lg" data-bs-toggle="modal" data-bind="click: function() { $parent.editPassword($data) }" title="Edit"><i class="fa-solid fa-pen-to-square"></i></button>
+                        <button class="btn btn-danger btn-lg" data-bind="click: function() { $parent.deletePasswordConfirm($data) }" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    
+    <!-- Error Modal -->
+   <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" data-bind="text: errormodalTitle" id="errorModalLabel"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p data-bind="text: errorMessage, class: modalCssClass"></p> <!-- Bind error message here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+
+
+
+    
+    
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/knockout@3.5.1/build/output/knockout-latest.js"></script>
+    <!-- Reference the external JavaScript file -->
+    <script src="~/js/accountPage.js"></script>
+}
